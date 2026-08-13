@@ -21,37 +21,23 @@ class Base(DeclarativeBase, AsyncAttrs):
     id: Mapped[int] = MappedColumn(Integer, primary_key=True)
 
 
-class User(Base):
-    __tablename__ = 'users'
-
-    name: Mapped[str] = MappedColumn(String(155))
-    surname: Mapped[str] = MappedColumn(String(205), nullable=True)
-
-    def id_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'surname': self.surname
-        }
-
-
 class Advertisement(Base):
     __tablename__ = 'advertisements'
 
-    title: Mapped[str] = MappedColumn(String(200), unique=True)
-    description: Mapped[str] = MappedColumn(String(600))
-    price: Mapped[int] = MappedColumn(Numeric(precision=9, scale=2))
-    master: Mapped[int] = MappedColumn(Integer, ForeignKey('users.id'))
-    created_at: Mapped[datetime] = MappedColumn(DateTime, default=func.now())
+    title: Mapped[str] = MappedColumn(String(200), nullable=False)
+    description: Mapped[str] = MappedColumn(String(600), nullable=False)
+    price: Mapped[float] = MappedColumn(Numeric(precision=11, scale=2), nullable=False)
+    autor: Mapped[str] = MappedColumn(String(100), nullable=False)
+    created_at: Mapped[datetime] = MappedColumn(DateTime, default=func.now(), nullable=False)
 
-    def is_dict(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
             'description': self.description,
             'price': self.price,
-            'master': self.master,
-            'created_at': self.created_at
+            'master': self.autor,
+            'created_at': self.created_at.isoformat()
         }
 
 
