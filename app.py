@@ -37,7 +37,7 @@ async def get_advertisements_by_fields(
         title: str = None,
         description: str = None,
         price: float = None,
-        autor: str = None,
+        author: str = None,
         created_at: str = None,
         created_before: str = None,
         created_after: str = None
@@ -50,8 +50,8 @@ async def get_advertisements_by_fields(
             stml = stml.where(Advertisement.description.ilike(f"%{description}%"))
         if price:
             stml = stml.where(Advertisement.price == price)
-        if autor:
-            stml = stml.where(Advertisement.autor.ilike(f"%{autor}%"))
+        if author:
+            stml = stml.where(Advertisement.author.ilike(f"%{author}%"))
         try:
             if created_at:
                 stml = stml.where(Advertisement.created_at == datetime.fromisoformat(created_at))
@@ -94,7 +94,7 @@ async def create_advertisement(request_data: AdvertisementsPostInp):
             title=request_data.title,
             description=request_data.description,
             price=request_data.price,
-            autor=request_data.autor
+            author=request_data.author
         )
         session.add(advertisement)
         await session.commit()

@@ -5,7 +5,7 @@ class AdvertisementsPostInp(BaseModel):
     title: str = Field(min_length=5, max_length=200)
     description: str = Field(min_length=30, max_length=600)
     price: float = Field(ge=0, le=499_999_999)
-    autor: str
+    author: str
 
     @field_validator('price')
     def price_validator(cls, value):

@@ -27,7 +27,7 @@ class Advertisement(Base):
     title: Mapped[str] = MappedColumn(String(200), nullable=False)
     description: Mapped[str] = MappedColumn(String(600), nullable=False)
     price: Mapped[float] = MappedColumn(Numeric(precision=11, scale=2), nullable=False)
-    autor: Mapped[str] = MappedColumn(String(100), nullable=False)
+    author: Mapped[str] = MappedColumn(String(100), nullable=False)
     created_at: Mapped[datetime] = MappedColumn(DateTime, default=func.now(), nullable=False)
 
     def to_dict(self):
@@ -36,7 +36,7 @@ class Advertisement(Base):
             'title': self.title,
             'description': self.description,
             'price': self.price,
-            'master': self.autor,
+            'master': self.author,
             'created_at': self.created_at.isoformat()
         }
 
